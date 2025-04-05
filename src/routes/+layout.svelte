@@ -1,7 +1,6 @@
 <script>
 	import '../app.css';
 	import { authLoading } from '$lib/auth';
-	import { navigating } from '$app/state';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import Navigation from '$lib/components/Navigation.svelte';
@@ -12,11 +11,9 @@
 	onMount(() => {
 		if (browser) {
 			// Wait for auth state to be determined
-			const unsubscribe = authLoading.subscribe(loading => {
+			return authLoading.subscribe(loading => {
 				if (!loading) isInitializing = false;
 			});
-
-			return unsubscribe;
 		}
 	});
 </script>

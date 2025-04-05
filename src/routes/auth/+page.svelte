@@ -7,13 +7,11 @@
 	onMount(() => {
 		// Redirect to timers if already logged in
 		// If user is already logged in, redirect to timers page
-		const unsubscribe = user.subscribe(currentUser => {
+		return user.subscribe(currentUser => {
 			if (currentUser) {
 				goto('/my-timers');
 			}
 		});
-
-		return unsubscribe;
 	});
 </script>
 

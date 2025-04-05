@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 	import { user } from '$lib/auth';
 	import { goto } from '$app/navigation';
-	import { subscribeToUserTimers, subscribeToTeamTimers, myTimers, teamTimersStore } from '$lib/firebase';
+	import { subscribeToUserTimers, myTimers } from '$lib/firebase';
 	import TeamTimers from '$lib/components/TeamTimers.svelte';
 	import UserProfile from '$lib/components/Auth/UserProfile.svelte';
 
