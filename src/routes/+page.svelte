@@ -6,7 +6,7 @@
 	onMount(() => {
 		// Redirect to appropriate page based on auth state
 		if ($user) {
-			goto('/timers');
+			goto('/my-timers');
 		} else {
 			goto('/auth');
 		}

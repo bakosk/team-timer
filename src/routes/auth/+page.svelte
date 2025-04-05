@@ -9,7 +9,7 @@
 		// If user is already logged in, redirect to timers page
 		const unsubscribe = user.subscribe(currentUser => {
 			if (currentUser) {
-				goto('/timers');
+				goto('/my-timers');
 			}
 		});
 

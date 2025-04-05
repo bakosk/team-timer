@@ -3,30 +3,30 @@
 	import { browser } from '$app/environment';
 	import { user } from '$lib/auth';
 	import { goto } from '$app/navigation';
-	import { subscribeToTeamTimers, teamTimersStore } from '$lib/firebase';
+	import { subscribeToUserTimers, subscribeToTeamTimers, myTimers, teamTimersStore } from '$lib/firebase';
 	import TeamTimers from '$lib/components/TeamTimers.svelte';
 	import UserProfile from '$lib/components/Auth/UserProfile.svelte';
 
-	let teamUnsubscribe;
+	let userUnsubscribe;
 	let authUnsubscribe;
 
 	onMount(() => {
 		if (browser) {
 			// Redirect to auth if not logged in
-			 authUnsubscribe = user.subscribe(currentUser => {
+			authUnsubscribe = user.subscribe(currentUser => {
 				if (!currentUser) {
 					goto('/auth');
 				}
 			});
 
-			// Subscribe to team timers
-			teamUnsubscribe = subscribeToTeamTimers();
+			// Subscribe to user's timers
+			userUnsubscribe = subscribeToUserTimers($user.uid);
 		}
 	});
 
 	onDestroy(() => {
 		if (browser) {
-			if (teamUnsubscribe) teamUnsubscribe();
+			if (userUnsubscribe) userUnsubscribe();
 			if (authUnsubscribe) authUnsubscribe();
 		}
 	});
@@ -39,10 +39,9 @@
 	</div>
 
 	<div class="grid gap-8">
-
 		<div class="bg-white p-6 rounded-lg shadow-sm">
-			<h2 class="text-xl font-bold mb-4">Team Timers</h2>
-			<TeamTimers timers={$teamTimersStore} isPersonal={false} />
+			<h2 class="text-xl font-bold mb-4">My Timers</h2>
+			<TeamTimers timers={$myTimers} isPersonal={true} />
 		</div>
 	</div>
 </div>

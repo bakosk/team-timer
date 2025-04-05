@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="mb-6">
+	<div class="mb-12">
 		<div class="flex gap-2 mb-4">
 			<input
 				type="text"
@@ -90,7 +90,7 @@
 			No {isPersonal ? 'personal' : 'team'} timers yet. Add one to get started!
 		</div>
 	{:else}
-		<div class="grid gap-4">
+		<div class="grid gap-4  md:grid-cols-2">
 			{#each timers as timer (timer.id)}
 				<Timer
 					id={timer.id}
